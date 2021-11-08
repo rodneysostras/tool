@@ -1,0 +1,26 @@
+#! / bin / bash 
+clear 
+part = $ (mount | grep '^ / dev. * /' | awk '{print $ 1}') 
+if [-z "$ part"]; then 
+    echo "Erro detectando rootfs" 
+    sair - 1 
+fi 
+dev = $ (echo $ part | sed 's / [0-9] * $ // g') 
+devlen = $ {# dev} 
+num = $ {part: $ devlen} 
+if [["$ dev" = ~ ^ / dev / mmcblk [0-9] * p $]]; então 
+    dev = $ {dev: 0: -1} 
+fi 
+if [! -x / usr / bin / growpart]; em seguida, 
+    echo "Instale o cloud-utils-growpart (sudo yum install cloud-utils-growpart)" 
+    exit -2 
+fi 
+if [! -x / usr / sbin / resize2fs]; em seguida, 
+    echo "Instale o e2fsprogs (sudo yum install e2fsprogs)"
+
+echo "Estendendo a partição $ num para o tamanho máximo ...." 
+growpart $ dev $ num 
+echo "Redimensionando o sistema de arquivos ext4 ..." 
+resize2fs $ part 
+echo "Feito." 
+df -h | grep $ part
