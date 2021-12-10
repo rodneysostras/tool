@@ -1,0 +1,21 @@
+HTML
+    HEAD
+        TITLE
+    BODY
+        NAV
+            UL
+                LI
+                    A
+        MAIN
+            ARTICLE
+                HEADER
+                    H1
+                SECTION
+                    H2
+                    P
+                    NAV
+                        H3
+                        A
+                SECTION
+                    H2
+                    P
